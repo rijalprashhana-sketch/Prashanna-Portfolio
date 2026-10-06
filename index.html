@@ -87,7 +87,7 @@ async function readList(){ // returns {list, sha}
  const j=await r.json();return{list:JSON.parse(decodeURIComponent(escape(atob(j.content.replace(/\n/g,''))))||'[]'),sha:j.sha}}
 async function putFile(path,b64c,sha,msg){
  const r=await fetch(API+path,{method:'PUT',headers:hdr({'Content-Type':'application/json'}),body:JSON.stringify({message:msg,content:b64c,branch:BR,...(sha?{sha}:{})})});
- if(!r.ok){let m='';try{m=(await r.json()).message}catch(e){}const e=new Error(m||('GitHub '+r.status));e.status=r.status;throw e}return r.json()}
+ if(!r.ok){let m='';try{m=(await r.json()).message}catch(e){}const need=r.headers.get('x-accepted-github-permissions');const e=new Error((m||('GitHub '+r.status))+' [repo: '+OWNER+'/'+REPO+', branch: '+BR+(need?', needs: '+need:'')+']');e.status=r.status;throw e}return r.json()}
 async function commitList(mut,msg){
  for(let i=0;i<3;i++){const{list,sha}=await readList();const nl=mut(list);
   try{await putFile(DATA,b64(JSON.stringify(nl,null,1)),sha,msg);E=nl.sort((a,b)=>(b.ts||0)-(a.ts||0));return}
