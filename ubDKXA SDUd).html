@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Prashanna Rijal | Read, Write & Remember</title>
+<meta name="description" content="Stories, poems, activities, academics and training by Prashanna Rijal.">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f1e9;--fg:#231f1a;--mut:#75695c;--card:#fffaf2;--line:#e3d9c9;--acc:#b4542f;--sb:#efe7da;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14161a;--fg:#e9e4da;--mut:#9a948a;--card:#1b1e24;--line:#2a2e36;--acc:#e0875f;--sb:#101216}}
+:root[data-theme="dark"]{--bg:#14161a;--fg:#e9e4da;--mut:#9a948a;--card:#1b1e24;--line:#2a2e36;--acc:#e0875f;--sb:#101216}
+*{box-sizing:border-box}html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.7 Inter,system-ui,sans-serif;display:flex}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;font-weight:400;line-height:1.2;margin:0 0 .4em}
+h1{font-size:clamp(1.9rem,4vw,2.8rem)}
+#sb{width:250px;flex:none;background:var(--sb);border-right:1px solid var(--line);padding:24px 16px;overflow:auto;height:100%}
+#sb .logo{font-family:Fraunces,serif;font-size:1.25rem;margin-bottom:6px;display:block}
+#sb a{display:block;padding:8px 12px;border-radius:10px;color:var(--mut);text-decoration:none;cursor:pointer;font-size:.95rem}
+#sb a:hover,#sb a.on{background:var(--card);color:var(--fg)}
+#sb .sub a{margin-left:16px;font-size:.88rem}
+#sb .gl{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--acc);margin:18px 12px 6px}
+main{flex:1;overflow:auto;height:100%;padding:30px clamp(18px,4vw,50px) 60px}
+.inner{max-width:760px;margin:0 auto}.top{display:none}
+@media(max-width:800px){body{display:block}#sb{position:fixed;z-index:30;left:-260px;transition:.3s;width:250px}#sb.open{left:0}main{height:auto;min-height:100%}.top{display:flex;margin-bottom:16px}}
+button{font:inherit;cursor:pointer;border:1px solid var(--fg);background:transparent;color:var(--fg);padding:9px 20px;border-radius:99px;transition:.2s}
+button:hover{transform:translateY(-2px)}button.p{background:var(--fg);color:var(--bg)}button.s{padding:3px 12px;font-size:.8rem;border-color:var(--line);color:var(--mut)}button:disabled{opacity:.5}
+input,textarea,select{width:100%;font:inherit;padding:10px 14px;margin:0 0 10px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--fg)}
+textarea{min-height:130px;resize:vertical}
+.box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;margin:18px 0}
+.ent{animation:f .6s both}@keyframes f{from{opacity:0;transform:translateY(12px)}to{opacity:1}}
+.ent img,.ent video{width:100%;max-height:420px;object-fit:cover;border-radius:10px;margin:8px 0}.ent img{cursor:zoom-in}
+.car{position:relative;margin:8px 0}.trk{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:0;border-radius:10px;scrollbar-width:none;-webkit-overflow-scrolling:touch}.trk::-webkit-scrollbar{display:none}.sl{flex:0 0 100%;scroll-snap-align:center;background:#000;display:flex;align-items:center;justify-content:center}.sl img,.sl video{margin:0;border-radius:0;max-height:480px;width:100%;object-fit:contain}
+.cn{position:absolute;top:10px;right:10px;background:#0009;color:#fff;font-size:.78rem;padding:2px 10px;border-radius:99px}.ar{position:absolute;top:50%;transform:translateY(-50%);background:#fffc;color:#000;border:0;width:34px;height:34px;padding:0;border-radius:50%}.ar.l{left:8px}.ar.r{right:8px}@media(hover:none){.ar{display:none}}.dots{display:flex;justify-content:center;gap:6px;margin-top:8px}.dots i{width:7px;height:7px;border-radius:50%;background:var(--line)}.dots i.on{background:var(--acc)}
+.body{white-space:pre-wrap;font-family:Fraunces,serif;font-size:1.1rem;line-height:1.85}.poem .body{text-align:center;font-style:italic}
+.meta{color:var(--mut);font-size:.82rem}.empty{color:var(--mut);font-style:italic}
+#lb{position:fixed;inset:0;background:#000e;display:none;align-items:center;justify-content:center;z-index:50}#lb.on{display:flex}#lb img{max-width:94vw;max-height:90vh}
+@media(prefers-reduced-motion:reduce){.ent{animation:none}}
+</style></head>
+<body>
+<aside id="sb"><span class="logo">Prashanna Rijal</span><p class="meta" id="role" style="padding:0 12px">Reading</p><div id="nav"></div>
+<p style="padding:0 12px"><button class="s" id="th">◐ Light / Dark</button></p></aside>
+<main><div class="inner"><div class="top"><button class="s" id="bg">☰ Menu</button></div><div id="head"></div><div id="cmp"></div><div id="lst"></div></div></main>
+<div id="lb"></div>
+<script>
+const SEC={stories:'Stories',poems:'Poems',leo:'Leo Club of Ambassador',drone:'Mini Drone',quiz:'Quiz',research:'Research',academics:'Academics',training:'Training'};
+const BLURB={stories:'Stories I have written.',poems:'Poems I have written.',leo:'Service, events and memories with the Leo Club of Ambassador.',drone:'Notes, photos and lessons from building the mini drone.',quiz:'Quiz competitions and what I learned from them.',research:'Research notes, questions and experiments.',academics:'Schools, subjects, results and study notes.',training:'Training, courses and certificates.'};
+let E=[],DB=null,AS=null,OWN=false,cur='home',editId=null,busy=false;
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const q=s=>document.querySelector(s);
+function nav(){const a=(k,t)=>`<a class="${cur==k?'on':''}" onclick="go('${k}')">${t}</a>`;
+q('#nav').innerHTML=a('home',OWN?'✎ Read & Write':'Home')+'<div class="gl">Writing</div>'+a('stories','Stories')+a('poems','Poems')+'<div class="gl">ECA</div><div class="sub">'+['leo','drone','quiz','research'].map(k=>a(k,SEC[k])).join('')+'</div><div class="gl">Learning</div>'+a('academics','Academics')+a('training','Training')+'<div class="gl">Contact</div>'+a('chat','Chat with me')}
+function go(k){cur=k;editId=null;q('#sb').classList.remove('open');draw();q('main').scrollTop=0}
+function composer(sec){if(!OWN)return'';const e=E.find(x=>x.id==editId)||{};
+return `<div class="box"><h3>${editId?'Edit entry':'Write something'}</h3>
+${sec?'':`<select id="sec">${Object.entries(SEC).map(([k,v])=>`<option value="${k}" ${e.sec==k?'selected':''}>${v}</option>`).join('')}</select>`}
+<input id="ti" placeholder="Title" value="${esc(e.title)}"><textarea id="bo" placeholder="Start writing here…">${esc(e.body)}</textarea>
+<p class="meta" style="margin:0 0 4px">Photos or videos — select several to make a swipeable set (up to 20 MB each)${editId&&mlist(e).length?' — new ones are added after the current ones':''}</p>
+<input type="file" id="fi" accept="image/*,video/*" multiple>${editId&&mlist(e).length?'<label class="meta"><input type="checkbox" id="rp" style="width:auto;margin-right:6px">Remove current photos/videos</label><br>':''}<button class="p" id="pb" onclick="pub('${sec||''}')">${editId?'Save changes':'Publish'}</button> ${editId?'<button onclick="go(cur)">Cancel</button>':''}<span class="meta" id="msg"></span></div>`}
+function mlist(e){return e.media&&e.media.length?e.media:(e.assetId?[{id:e.assetId,t:e.ctype}]:[])}
+function media(e){const L=mlist(e);if(!L.length)return'';const one=m=>(m.t||'').startsWith('video')?`<video src="/_blob/${m.id}" controls preload="metadata"></video>`:`<img src="/_blob/${m.id}" alt="" onclick="lb(this.src)">`;
+if(L.length==1)return one(L[0]);
+return `<div class="car"><div class="trk" onscroll="dots(this)">${L.map(m=>`<div class="sl">${one(m)}</div>`).join('')}</div><span class="cn">1/${L.length}</span><button class="ar l" aria-label="Previous" onclick="nx(this,-1)">‹</button><button class="ar r" aria-label="Next" onclick="nx(this,1)">›</button><div class="dots">${L.map((m,i)=>`<i class="${i?'':'on'}"></i>`).join('')}</div></div>`}
+function dots(t){const i=Math.round(t.scrollLeft/t.clientWidth),c=t.parentNode;c.querySelector('.cn').textContent=(i+1)+'/'+t.children.length;c.querySelectorAll('.dots i').forEach((d,k)=>d.classList.toggle('on',k==i))}
+function nx(b,d){const t=b.parentNode.querySelector('.trk');t.scrollBy({left:d*t.clientWidth,behavior:'smooth'})}
+function listE(items,showSec){if(!items.length)return '<p class="empty">Nothing here yet.</p>';
+return items.map(e=>`<article class="box ent ${e.sec=='poems'?'poem':''}"><h3>${esc(e.title||'Untitled')}</h3><div class="meta">${showSec?esc(SEC[e.sec]||'')+' · ':''}${esc(e.date)}</div>${media(e)}<div class="body">${esc(e.body)}</div>${OWN?`<p style="margin-top:12px"><button class="s" onclick="ed('${e.id}')">Edit</button> <button class="s" onclick="del('${e.id}')">Delete</button></p>`:''}</article>`).join('')}
+function drawList(){if(cur=='chat'){q('#lst').innerHTML='';return}
+q('#lst').innerHTML=(cur=='home'?'<h2>Everything I\'ve written</h2>':'')+listE(cur=='home'?E:E.filter(e=>e.sec==cur),cur=='home')}
+function draw(){nav();q('#role').textContent=OWN?'Owner mode — you can write & upload':'Read-only';
+if(cur=='chat'){q('#head').innerHTML='<h1>Chat with me</h1><p>Say hello — your message opens in your email app, addressed to me.</p>';q('#cmp').innerHTML=`<div class="box"><input id="cn" placeholder="Your name"><textarea id="cm" placeholder="Your message"></textarea><button class="p" onclick="mail()">Send email</button><p class="meta" style="margin-top:12px">Or write to <a href="mailto:rijalprashhana@gmail.com">rijalprashhana@gmail.com</a></p></div>`}
+else{q('#head').innerHTML=cur=='home'?`<h1>${OWN?'Read & write':'Prashanna Rijal'}</h1><p class="meta" style="font-size:1rem">A place to document what I build, what I learn, what I write, and what I wonder about.</p>`:`<h1>${SEC[cur]}</h1><p class="meta" style="font-size:1rem">${BLURB[cur]}</p>`;q('#cmp').innerHTML=composer(cur=='home'?'':cur)}
+drawList()}
+async function pub(sec){if(!OWN||!DB||busy)return;const t=q('#ti').value.trim(),b=q('#bo').value.trim(),fs=[...q('#fi').files];
+if(!t&&!b&&!fs.length){alert('Write something or add a photo/video first.');return}
+busy=true;q('#pb').disabled=true;const m=q('#msg');m.textContent=fs.length?' Uploading…':' Saving…';
+try{const s=sec||q('#sec').value,old=E.find(x=>x.id==editId)||{},d={sec:s,title:t,body:b,media:q('#rp')&&q('#rp').checked?[]:mlist(old),date:old.date||new Date().toLocaleDateString(undefined,{year:'numeric',month:'short',day:'numeric'}),ts:old.ts||Date.now()};
+if(fs.length){if(!AS)throw new Error('Uploads unavailable');let n=0;for(const f of fs){m.textContent=' Uploading '+(++n)+' of '+fs.length+'…';const r=await AS.upload(f);d.media.push({id:r.id,t:r.contentType||f.type})}}
+await DB.collection('entries').doc(editId||String(d.ts)).set(d);editId=null;draw()}
+catch(e){m.textContent=' Could not save: '+(e.message||e.code||'error');q('#pb').disabled=false}busy=false}
+function ed(id){editId=id;draw();q('main').scrollTop=0}
+async function del(id){if(OWN&&DB&&confirm('Delete this entry?'))try{await DB.collection('entries').doc(id).delete()}catch(e){alert('Could not delete.')}}
+function lb(s){const l=q('#lb');l.innerHTML=`<img src="${s}" alt="">`;l.classList.add('on');l.onclick=()=>l.classList.remove('on')}
+function mail(){location.href='mailto:rijalprashhana@gmail.com?subject='+encodeURIComponent('Hello from '+q('#cn').value)+'&body='+encodeURIComponent(q('#cm').value)}
+q('#bg').onclick=()=>q('#sb').classList.toggle('open');
+q('#th').onclick=()=>{const r=document.documentElement,d=r.dataset.theme?r.dataset.theme=='dark':matchMedia('(prefers-color-scheme:dark)').matches;r.dataset.theme=d?'light':'dark'};
+draw();
+(async()=>{try{const u=await claude.use('user');OWN=!!(u&&u.isOwner());DB=await claude.use('db');if(OWN)AS=await claude.use('assets');
+if(DB)DB.collection('entries').onSnapshot(s=>{E=s.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(b.ts||0)-(a.ts||0));drawList()});
+q('#cmp').firstChild||draw();nav();q('#role').textContent=OWN?'Owner mode — you can write & upload':'Read-only';if(cur=='home'||OWN)draw()}catch(e){}})();
+</script></body></html>
