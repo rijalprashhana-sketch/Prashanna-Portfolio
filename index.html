@@ -37,15 +37,22 @@ textarea{min-height:130px;resize:vertical}
 </style></head>
 <body>
 <aside id="sb"><span class="logo">Prashanna Rijal</span><p class="meta" id="role" style="padding:0 12px">Reading</p><div id="nav"></div>
-<p style="padding:0 12px"><button class="s" id="th">◐ Light / Dark</button></p></aside>
+<p style="padding:0 12px"><button class="s" id="th">◐ Light / Dark</button></p><p style="padding:0 12px"><button class="s" id="ow">Owner login</button></p></aside>
 <main><div class="inner"><div class="top"><button class="s" id="bg">☰ Menu</button></div><div id="head"></div><div id="cmp"></div><div id="lst"></div></div></main>
 <div id="lb"></div>
 <script>
+/* ===== CONFIG: leave blank to auto-detect from your github.io URL ===== */
+const CFG={owner:'',repo:'',branch:'main'};
+const H=location.hostname,P=location.pathname.split('/').filter(Boolean);
+const OWNER=CFG.owner||H.split('.')[0],REPO=CFG.repo||(H.endsWith('github.io')?(P[0]&&!P[0].endsWith('.html')?P[0]:OWNER+'.github.io'):''),BR=CFG.branch;
+const API=`https://api.github.com/repos/${OWNER}/${REPO}/contents/`,RAW=`https://raw.githubusercontent.com/${OWNER}/${REPO}/${BR}/`,DATA='data/entries.json';
+let TOKEN=null;try{TOKEN=localStorage.getItem('gh_token')}catch(e){}
 const SEC={stories:'Stories',poems:'Poems',leo:'Leo Club of Ambassador',drone:'Mini Drone',quiz:'Quiz',research:'Research',academics:'Academics',training:'Training'};
 const BLURB={stories:'Stories I have written.',poems:'Poems I have written.',leo:'Service, events and memories with the Leo Club of Ambassador.',drone:'Notes, photos and lessons from building the mini drone.',quiz:'Quiz competitions and what I learned from them.',research:'Research notes, questions and experiments.',academics:'Schools, subjects, results and study notes.',training:'Training, courses and certificates.'};
-let E=[],DB=null,AS=null,OWN=false,cur='home',editId=null,busy=false;
+let E=[],OWN=false,cur='home',editId=null,busy=false;
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const q=s=>document.querySelector(s);
+const hdr=(extra)=>Object.assign({'Accept':'application/vnd.github+json'},TOKEN?{'Authorization':'Bearer '+TOKEN}:{},extra||{});
 function nav(){const a=(k,t)=>`<a class="${cur==k?'on':''}" onclick="go('${k}')">${t}</a>`;
 q('#nav').innerHTML=a('home',OWN?'✎ Read & Write':'Home')+'<div class="gl">Writing</div>'+a('stories','Stories')+a('poems','Poems')+'<div class="gl">ECA</div><div class="sub">'+['leo','drone','quiz','research'].map(k=>a(k,SEC[k])).join('')+'</div><div class="gl">Learning</div>'+a('academics','Academics')+a('training','Training')+'<div class="gl">Contact</div>'+a('chat','Chat with me')}
 function go(k){cur=k;editId=null;q('#sb').classList.remove('open');draw();q('main').scrollTop=0}
@@ -53,10 +60,11 @@ function composer(sec){if(!OWN)return'';const e=E.find(x=>x.id==editId)||{};
 return `<div class="box"><h3>${editId?'Edit entry':'Write something'}</h3>
 ${sec?'':`<select id="sec">${Object.entries(SEC).map(([k,v])=>`<option value="${k}" ${e.sec==k?'selected':''}>${v}</option>`).join('')}</select>`}
 <input id="ti" placeholder="Title" value="${esc(e.title)}"><textarea id="bo" placeholder="Start writing here…">${esc(e.body)}</textarea>
-<p class="meta" style="margin:0 0 4px">Photos or videos — select several to make a swipeable set (up to 20 MB each)${editId&&mlist(e).length?' — new ones are added after the current ones':''}</p>
+<p class="meta" style="margin:0 0 4px">Photos or videos — select several to make a swipeable set (photos are shrunk automatically; videos up to 25 MB)${editId&&mlist(e).length?' — new ones are added after the current ones':''}</p>
 <input type="file" id="fi" accept="image/*,video/*" multiple>${editId&&mlist(e).length?'<label class="meta"><input type="checkbox" id="rp" style="width:auto;margin-right:6px">Remove current photos/videos</label><br>':''}<button class="p" id="pb" onclick="pub('${sec||''}')">${editId?'Save changes':'Publish'}</button> ${editId?'<button onclick="go(cur)">Cancel</button>':''}<span class="meta" id="msg"></span></div>`}
-function mlist(e){return e.media&&e.media.length?e.media:(e.assetId?[{id:e.assetId,t:e.ctype}]:[])}
-function media(e){const L=mlist(e);if(!L.length)return'';const one=m=>(m.t||'').startsWith('video')?`<video src="/_blob/${m.id}" controls preload="metadata"></video>`:`<img src="/_blob/${m.id}" alt="" onclick="lb(this.src)">`;
+function mlist(e){return e.media||[]}
+function fb(el){if(el.dataset.f)return;el.dataset.f=1;el.src=RAW+el.getAttribute('src')}
+function media(e){const L=mlist(e);if(!L.length)return'';const one=m=>(m.t||'').startsWith('video')?`<video src="${esc(m.p)}" onerror="fb(this)" controls preload="metadata"></video>`:`<img src="${esc(m.p)}" onerror="fb(this)" alt="" onclick="lb(this.src)">`;
 if(L.length==1)return one(L[0]);
 return `<div class="car"><div class="trk" onscroll="dots(this)">${L.map(m=>`<div class="sl">${one(m)}</div>`).join('')}</div><span class="cn">1/${L.length}</span><button class="ar l" aria-label="Previous" onclick="nx(this,-1)">‹</button><button class="ar r" aria-label="Next" onclick="nx(this,1)">›</button><div class="dots">${L.map((m,i)=>`<i class="${i?'':'on'}"></i>`).join('')}</div></div>`}
 function dots(t){const i=Math.round(t.scrollLeft/t.clientWidth),c=t.parentNode;c.querySelector('.cn').textContent=(i+1)+'/'+t.children.length;c.querySelectorAll('.dots i').forEach((d,k)=>d.classList.toggle('on',k==i))}
@@ -65,25 +73,57 @@ function listE(items,showSec){if(!items.length)return '<p class="empty">Nothing 
 return items.map(e=>`<article class="box ent ${e.sec=='poems'?'poem':''}"><h3>${esc(e.title||'Untitled')}</h3><div class="meta">${showSec?esc(SEC[e.sec]||'')+' · ':''}${esc(e.date)}</div>${media(e)}<div class="body">${esc(e.body)}</div>${OWN?`<p style="margin-top:12px"><button class="s" onclick="ed('${e.id}')">Edit</button> <button class="s" onclick="del('${e.id}')">Delete</button></p>`:''}</article>`).join('')}
 function drawList(){if(cur=='chat'){q('#lst').innerHTML='';return}
 q('#lst').innerHTML=(cur=='home'?'<h2>Everything I\'ve written</h2>':'')+listE(cur=='home'?E:E.filter(e=>e.sec==cur),cur=='home')}
-function draw(){nav();q('#role').textContent=OWN?'Owner mode — you can write & upload':'Read-only';
+function draw(){nav();q('#role').textContent=OWN?'Owner mode — you can write & upload':'Read-only';q('#ow').textContent=OWN?'Log out of owner mode':'Owner login';
 if(cur=='chat'){q('#head').innerHTML='<h1>Chat with me</h1><p>Say hello — your message opens in your email app, addressed to me.</p>';q('#cmp').innerHTML=`<div class="box"><input id="cn" placeholder="Your name"><textarea id="cm" placeholder="Your message"></textarea><button class="p" onclick="mail()">Send email</button><p class="meta" style="margin-top:12px">Or write to <a href="mailto:rijalprashhana@gmail.com">rijalprashhana@gmail.com</a></p></div>`}
 else{q('#head').innerHTML=cur=='home'?`<h1>${OWN?'Read & write':'Prashanna Rijal'}</h1><p class="meta" style="font-size:1rem">A place to document what I build, what I learn, what I write, and what I wonder about.</p>`:`<h1>${SEC[cur]}</h1><p class="meta" style="font-size:1rem">${BLURB[cur]}</p>`;q('#cmp').innerHTML=composer(cur=='home'?'':cur)}
 drawList()}
-async function pub(sec){if(!OWN||!DB||busy)return;const t=q('#ti').value.trim(),b=q('#bo').value.trim(),fs=[...q('#fi').files];
+
+/* ===== GitHub storage ===== */
+const b64=s=>btoa(unescape(encodeURIComponent(s)));
+async function readList(){ // returns {list, sha}
+ const r=await fetch(API+DATA+'?ref='+BR+'&t='+Date.now(),{headers:hdr(),cache:'no-store'});
+ if(r.status==404)return{list:[],sha:undefined};
+ if(!r.ok){const e=new Error('GitHub '+r.status);e.status=r.status;throw e}
+ const j=await r.json();return{list:JSON.parse(decodeURIComponent(escape(atob(j.content.replace(/\n/g,''))))||'[]'),sha:j.sha}}
+async function putFile(path,b64c,sha,msg){
+ const r=await fetch(API+path,{method:'PUT',headers:hdr({'Content-Type':'application/json'}),body:JSON.stringify({message:msg,content:b64c,branch:BR,...(sha?{sha}:{})})});
+ if(!r.ok){let m='';try{m=(await r.json()).message}catch(e){}const e=new Error(m||('GitHub '+r.status));e.status=r.status;throw e}return r.json()}
+async function commitList(mut,msg){
+ for(let i=0;i<3;i++){const{list,sha}=await readList();const nl=mut(list);
+  try{await putFile(DATA,b64(JSON.stringify(nl,null,1)),sha,msg);E=nl.sort((a,b)=>(b.ts||0)-(a.ts||0));return}
+  catch(e){if(e.status!=409&&e.status!=422||i==2)throw e}}}
+async function loadPublic(){
+ try{const r=await fetch(API+DATA+'?ref='+BR+'&t='+Date.now(),{headers:hdr({'Accept':'application/vnd.github.raw'}),cache:'no-store'});if(!r.ok)throw 0;return await r.json()}
+ catch(e){try{const r=await fetch(DATA+'?t='+Date.now(),{cache:'no-store'});return r.ok?await r.json():[]}catch(e2){return[]}}}
+function fileB64(f){return new Promise((ok,no)=>{const r=new FileReader();r.onload=()=>ok(r.result.split(',')[1]);r.onerror=no;r.readAsDataURL(f)})}
+function shrink(f){return new Promise((ok)=>{if(!f.type.startsWith('image/')||/gif|svg/.test(f.type))return ok(f);const i=new Image(),u=URL.createObjectURL(f);i.onload=()=>{const s=Math.min(1,1800/Math.max(i.width,i.height)),c=document.createElement('canvas');c.width=i.width*s;c.height=i.height*s;c.getContext('2d').drawImage(i,0,0,c.width,c.height);c.toBlob(b=>ok(b||f),'image/jpeg',.85);URL.revokeObjectURL(u)};i.onerror=()=>ok(f);i.src=u})}
+async function upload(f){const isV=f.type.startsWith('video');if(isV&&f.size>25e6)throw new Error(f.name+' is over 25 MB');
+ const blob=isV?f:await shrink(f),ext=isV?(f.name.split('.').pop()||'mp4').toLowerCase():(blob.type=='image/jpeg'?'jpg':(f.name.split('.').pop()||'png').toLowerCase());
+ const path='media/'+Date.now()+'-'+Math.random().toString(36).slice(2,7)+'.'+ext;
+ await putFile(path,await fileB64(blob),undefined,'Add media');return{p:path,t:isV?(f.type||'video/mp4'):(blob.type||f.type)}}
+
+async function pub(sec){if(!OWN||busy)return;const t=q('#ti').value.trim(),b=q('#bo').value.trim(),fs=[...q('#fi').files];
 if(!t&&!b&&!fs.length){alert('Write something or add a photo/video first.');return}
-busy=true;q('#pb').disabled=true;const m=q('#msg');m.textContent=fs.length?' Uploading…':' Saving…';
-try{const s=sec||q('#sec').value,old=E.find(x=>x.id==editId)||{},d={sec:s,title:t,body:b,media:q('#rp')&&q('#rp').checked?[]:mlist(old),date:old.date||new Date().toLocaleDateString(undefined,{year:'numeric',month:'short',day:'numeric'}),ts:old.ts||Date.now()};
-if(fs.length){if(!AS)throw new Error('Uploads unavailable');let n=0;for(const f of fs){m.textContent=' Uploading '+(++n)+' of '+fs.length+'…';const r=await AS.upload(f);d.media.push({id:r.id,t:r.contentType||f.type})}}
-await DB.collection('entries').doc(editId||String(d.ts)).set(d);editId=null;draw()}
-catch(e){m.textContent=' Could not save: '+(e.message||e.code||'error');q('#pb').disabled=false}busy=false}
+busy=true;q('#pb').disabled=true;const m=q('#msg');m.textContent=' Saving…';
+try{const s=sec||q('#sec').value,old=E.find(x=>x.id==editId)||{},rm=q('#rp')&&q('#rp').checked;let med=rm?[]:[...mlist(old)],n=0;
+ for(const f of fs){m.textContent=' Uploading '+(++n)+' of '+fs.length+'…';med.push(await upload(f))}
+ m.textContent=' Publishing…';
+ const ts=old.ts||Date.now(),id=editId||String(ts),d={id,sec:s,title:t,body:b,media:med,date:old.date||new Date().toLocaleDateString(undefined,{year:'numeric',month:'short',day:'numeric'}),ts};
+ await commitList(l=>[d,...l.filter(x=>x.id!=id)],(editId?'Edit':'Add')+' entry');
+ editId=null;draw()}
+catch(e){m.textContent=' Could not save: '+(e.message||'error');q('#pb').disabled=false}busy=false}
 function ed(id){editId=id;draw();q('main').scrollTop=0}
-async function del(id){if(OWN&&DB&&confirm('Delete this entry?'))try{await DB.collection('entries').doc(id).delete()}catch(e){alert('Could not delete.')}}
+async function del(id){if(OWN&&confirm('Delete this entry?'))try{await commitList(l=>l.filter(x=>x.id!=id),'Delete entry');drawList()}catch(e){alert('Could not delete: '+e.message)}}
 function lb(s){const l=q('#lb');l.innerHTML=`<img src="${s}" alt="">`;l.classList.add('on');l.onclick=()=>l.classList.remove('on')}
 function mail(){location.href='mailto:rijalprashhana@gmail.com?subject='+encodeURIComponent('Hello from '+q('#cn').value)+'&body='+encodeURIComponent(q('#cm').value)}
+async function verify(){if(!TOKEN)return false;try{const r=await fetch(`https://api.github.com/repos/${OWNER}/${REPO}`,{headers:hdr()});if(!r.ok)return false;const j=await r.json();return !!(j.permissions&&j.permissions.push)}catch(e){return false}}
+async function ownerBtn(){if(OWN){TOKEN=null;OWN=false;try{localStorage.removeItem('gh_token')}catch(e){}draw();return}
+ const t=prompt('Paste your GitHub token (fine-grained, Contents: Read and write, for this repo only).\nIt is stored only in this browser.');if(!t)return;TOKEN=t.trim();
+ if(await verify()){OWN=true;try{localStorage.setItem('gh_token',TOKEN)}catch(e){}draw()}else{TOKEN=null;alert('That token does not have write access to '+OWNER+'/'+REPO+'.')}}
 q('#bg').onclick=()=>q('#sb').classList.toggle('open');
+q('#ow').onclick=ownerBtn;
 q('#th').onclick=()=>{const r=document.documentElement,d=r.dataset.theme?r.dataset.theme=='dark':matchMedia('(prefers-color-scheme:dark)').matches;r.dataset.theme=d?'light':'dark'};
 draw();
-(async()=>{try{const u=await claude.use('user');OWN=!!(u&&u.isOwner());DB=await claude.use('db');if(OWN)AS=await claude.use('assets');
-if(DB)DB.collection('entries').onSnapshot(s=>{E=s.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(b.ts||0)-(a.ts||0));drawList()});
-q('#cmp').firstChild||draw();nav();q('#role').textContent=OWN?'Owner mode — you can write & upload':'Read-only';if(cur=='home'||OWN)draw()}catch(e){}})();
+(async()=>{E=(await loadPublic()).sort((a,b)=>(b.ts||0)-(a.ts||0));drawList();
+ if(TOKEN){OWN=await verify();if(OWN){try{E=(await readList()).list.sort((a,b)=>(b.ts||0)-(a.ts||0))}catch(e){}draw()}}})();
 </script></body></html>
