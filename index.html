@@ -2,48 +2,109 @@
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Prashanna Rijal | Read, Write & Remember</title>
-<meta name="description" content="Apps, websites, stories, poems, activities, academics and training by Prashanna Rijal.">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500&family=Noto+Serif+Devanagari:wght@400;600&display=swap" rel="stylesheet">
+<meta name="description" content="Apps, websites, research, stories, poems, activities, academics and training by Prashanna Rijal.">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Public+Sans:wght@400;500;600&family=Noto+Serif+Devanagari:wght@400;600&display=swap" rel="stylesheet">
 <script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 <style>
-:root{--bg:#f6f1e9;--fg:#231f1a;--mut:#75695c;--card:#fffaf2;--line:#e3d9c9;--acc:#b4542f;--sb:#efe7da;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14161a;--fg:#e9e4da;--mut:#9a948a;--card:#1b1e24;--line:#2a2e36;--acc:#e0875f;--sb:#101216}}
-:root[data-theme="dark"]{--bg:#14161a;--fg:#e9e4da;--mut:#9a948a;--card:#1b1e24;--line:#2a2e36;--acc:#e0875f;--sb:#101216}
+:root{--bg:#f3f5f4;--fg:#14201e;--mut:#5b6a67;--card:#ffffff;--line:#d9e1de;--acc:#0e6a5f;--tint:#e3f0ed;--sb:#ffffff;--onacc:#ffffff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1312;--fg:#e5eeec;--mut:#8da09b;--card:#141c1a;--line:#25322f;--acc:#62c9b8;--tint:#15302b;--sb:#0a0f0e;--onacc:#08110f}}
+:root[data-theme="dark"]{--bg:#0d1312;--fg:#e5eeec;--mut:#8da09b;--card:#141c1a;--line:#25322f;--acc:#62c9b8;--tint:#15302b;--sb:#0a0f0e;--onacc:#08110f}
 *{box-sizing:border-box}html,body{height:100%}
-body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.7 Inter,system-ui,sans-serif;display:flex}
-h1,h2,h3{font-family:Fraunces,Georgia,serif;font-weight:400;line-height:1.2;margin:0 0 .4em}
-h1{font-size:clamp(1.9rem,4vw,2.8rem)}h2{font-size:1.4rem;margin-top:28px}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.65 "Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;display:flex;-webkit-text-size-adjust:100%}
+h1,h2,h3{font-family:Newsreader,Georgia,serif;font-weight:500;line-height:1.2;margin:0 0 .4em}
+h1{font-size:clamp(2rem,4.4vw,2.9rem);letter-spacing:-.01em}
 a{color:var(--acc)}
-#sb{width:250px;flex:none;background:var(--sb);border-right:1px solid var(--line);padding:24px 16px;overflow:auto;height:100%}
-#sb .logo{font-family:Fraunces,serif;font-size:1.25rem;margin-bottom:6px;display:block}
-#sb a{display:block;padding:8px 12px;border-radius:10px;color:var(--mut);text-decoration:none;cursor:pointer;font-size:.95rem}
-#sb a:hover,#sb a.on{background:var(--card);color:var(--fg)}
-#sb .sub a{margin-left:16px;font-size:.88rem}
-#sb .gl{font-size:.8rem;color:var(--acc);margin:18px 12px 6px}
-main{flex:1;overflow:auto;height:100%;padding:30px clamp(18px,4vw,50px) 60px}
-.inner{max-width:760px;margin:0 auto}.top{display:none}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+#sb{width:252px;flex:none;background:var(--sb);border-right:1px solid var(--line);padding:26px 16px;overflow:auto;height:100%}
+#sb .logo{font-family:Newsreader,Georgia,serif;font-size:1.4rem;font-weight:500;display:block;padding:0 12px}
+#sb #role{padding:0 12px;margin:2px 0 16px;font-size:.84rem}
+#sb a{display:block;padding:7px 12px;border-radius:8px;color:var(--mut);text-decoration:none;font-size:.94rem}
+#sb a:hover{color:var(--fg);background:var(--tint)}
+#sb a.on{background:var(--tint);color:var(--acc);font-weight:600}
+#sb .sub a{margin-left:14px;font-size:.89rem}
+#sb .gl{font-size:.8rem;font-weight:600;color:var(--mut);margin:20px 12px 4px}
+#sb .sbf{padding:20px 12px 0;display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+main{flex:1;overflow:auto;height:100%;padding:34px clamp(18px,4vw,56px) 70px}
+.inner{max-width:800px;margin:0 auto}.top{display:none}
 #sc{display:none}
-@media(max-width:800px){body{display:block}#sb{position:fixed;z-index:30;left:-260px;transition:.3s;width:250px}#sb.open{left:0}#sc.on{display:block;position:fixed;inset:0;background:#0006;z-index:20}main{height:auto;min-height:100%}.top{display:flex;gap:8px;margin-bottom:16px}}
-button{font:inherit;cursor:pointer;border:1px solid var(--fg);background:transparent;color:var(--fg);padding:9px 20px;border-radius:99px}
-button.p{background:var(--fg);color:var(--bg)}button.s{padding:3px 12px;font-size:.8rem;border-color:var(--line);color:var(--mut)}button:disabled{opacity:.5}
-a.btn{display:inline-block;font:inherit;border:1px solid var(--fg);background:var(--fg);color:var(--bg);padding:7px 18px;border-radius:99px;text-decoration:none;font-size:.92rem}
+@media(max-width:800px){body{display:block}#sb{position:fixed;top:0;z-index:30;left:-270px;transition:left .25s;width:252px}#sb.open{left:0}#sc.on{display:block;position:fixed;inset:0;background:#0007;z-index:20}main{height:auto;min-height:100%;padding-top:0}.top{display:flex;gap:8px;position:sticky;top:0;z-index:10;background:var(--bg);padding:12px 0;margin-bottom:14px;border-bottom:1px solid var(--line)}}
+button{font:inherit;cursor:pointer;border:1px solid var(--fg);background:transparent;color:var(--fg);padding:8px 20px;border-radius:99px}
+button.p{background:var(--fg);color:var(--bg)}
+button.s{padding:3px 12px;font-size:.8rem;border-color:var(--line);color:var(--mut)}
+button.s:hover{color:var(--fg);border-color:var(--mut)}
+button:disabled{opacity:.5}
+a.btn{display:inline-block;font:inherit;font-size:.9rem;font-weight:500;background:var(--acc);border:1px solid var(--acc);color:var(--onacc);padding:6px 18px;border-radius:99px;text-decoration:none}
+a.btn.o{background:transparent;color:var(--acc)}
+a.btn.sm{padding:3px 14px;font-size:.84rem}
 input,textarea,select{width:100%;font:inherit;padding:10px 14px;margin:0 0 10px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--fg)}
 textarea{min-height:130px;resize:vertical}
 .box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;margin:18px 0}
-.ent img,.ent video{width:100%;max-height:420px;object-fit:cover;border-radius:10px;margin:8px 0}.ent img{cursor:zoom-in}
+.lede{color:var(--mut);font-size:1.05rem;margin:0;max-width:60ch}
+.meta{color:var(--mut);font-size:.84rem}.empty{color:var(--mut);font-style:italic;padding:18px 0}
+.mrow{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap;font-size:.84rem}
+.sec{color:var(--acc);font-weight:600;font-size:.86rem;text-decoration:none}
+.pa{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+
+/* featured paper */
+.feat{border-left:3px solid var(--acc);background:var(--card);border-radius:0 12px 12px 0;padding:16px 20px;margin:24px 0 4px;display:flex;gap:18px;align-items:center;flex-wrap:wrap;justify-content:space-between}
+.feat>div:first-child{flex:1;min-width:230px}
+.feat h3{font-size:1.35rem;margin:2px 0 4px}.feat h3 a{color:var(--fg);text-decoration:none}
+.feat .ex{-webkit-line-clamp:2}
+
+/* search + filters */
+#tools{margin:26px 0 4px}
+#chips{display:flex;gap:8px;flex-wrap:wrap}
+button.chip{padding:5px 14px;font-size:.88rem;border-color:var(--line);color:var(--mut)}
+button.chip small{opacity:.8;margin-left:2px}
+button.chip:hover{color:var(--fg)}
+button.chip.on{background:var(--tint);border-color:var(--acc);color:var(--acc);font-weight:500}
+
+/* feed */
+.mo{font-family:"Public Sans",system-ui,sans-serif;font-size:.86rem;font-weight:600;color:var(--mut);margin:30px 0 8px}
+.row{display:grid;grid-template-columns:1fr 150px;gap:20px;padding:20px 0;border-top:1px solid var(--line);cursor:pointer}
+.row.nt{grid-template-columns:1fr}
+.rtitle{font-size:1.32rem;margin:2px 0 6px}
+.rtitle a{color:var(--fg);text-decoration:none}
+.row:hover .rtitle a{color:var(--acc);text-decoration:underline;text-underline-offset:3px}
+.ex{margin:0;color:var(--mut);white-space:pre-line;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere;line-height:1.55;font-size:.95rem}
+.poem .ex{font-style:italic}.poem.dev .ex{font-style:normal}
+.dev .ex{font-family:"Noto Serif Devanagari",Newsreader,Georgia,serif}
+.th{width:150px;height:112px;border-radius:8px;object-fit:cover;background:var(--tint);display:block}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.pill{display:inline-block;border:1px solid var(--line);border-radius:99px;padding:0 10px;font-size:.78rem;color:var(--mut)}
+.pill.hi{border-color:var(--acc);color:var(--acc);font-weight:600}
+.racts{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px}
+@media(max-width:560px){.row{grid-template-columns:1fr 92px;gap:14px}.th{width:92px;height:92px}}
+
+/* entry */
+.back{display:inline-block;margin-bottom:18px;color:var(--mut);text-decoration:none;font-size:.9rem}.back:hover{color:var(--acc)}
+.ent h1{margin:6px 0 10px}
+.ent img,.ent video{width:100%;max-height:440px;object-fit:cover;border-radius:10px;margin:8px 0}.ent img{cursor:zoom-in}
+.tags{color:var(--mut);font-size:.9rem;margin:2px 0 6px}
+.body{white-space:pre-wrap;font-family:Newsreader,"Noto Serif Devanagari",Georgia,serif;font-size:1.14rem;line-height:1.85;overflow-wrap:anywhere;margin-top:14px}
+.poem .body{text-align:center;font-style:italic}.poem.dev .body{font-style:normal}
+.acts{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:22px 0 0}
+
+/* pdf */
+.pdf{display:flex;gap:14px;align-items:center;flex-wrap:wrap;border:1px solid var(--line);background:var(--card);border-radius:12px;padding:14px 16px;margin:16px 0 8px}
+.pdf .ic{flex:none;width:42px;height:52px;border-radius:6px;background:var(--tint);color:var(--acc);border:1px solid var(--acc);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:.76rem}
+.pdf .tx{flex:1;min-width:180px;overflow-wrap:anywhere}.pdf .tx b{display:block;font-weight:600;line-height:1.35}
+.pvb iframe{width:100%;height:78vh;min-height:420px;border:1px solid var(--line);border-radius:10px;background:#fff;margin:0 0 10px;display:block}
+
+/* carousel */
 .car{position:relative;margin:8px 0}.trk{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:0;border-radius:10px;scrollbar-width:none;-webkit-overflow-scrolling:touch}.trk::-webkit-scrollbar{display:none}.sl{flex:0 0 100%;scroll-snap-align:center;background:#000;display:flex;align-items:center;justify-content:center}.sl img,.sl video{margin:0;border-radius:0;max-height:480px;width:100%;object-fit:contain}
 .cn{position:absolute;top:10px;right:10px;background:#0009;color:#fff;font-size:.78rem;padding:2px 10px;border-radius:99px}.ar{position:absolute;top:50%;transform:translateY(-50%);background:#fffc;color:#000;border:0;width:34px;height:34px;padding:0;border-radius:50%}.ar.l{left:8px}.ar.r{right:8px}@media(hover:none){.ar{display:none}}.dots{display:flex;justify-content:center;gap:6px;margin-top:8px}.dots i{width:7px;height:7px;border-radius:50%;background:var(--line)}.dots i.on{background:var(--acc)}
-.body{white-space:pre-wrap;font-family:Fraunces,"Noto Serif Devanagari",Georgia,serif;font-size:1.1rem;line-height:1.85}.poem .body{text-align:center;font-style:italic}.poem.dev .body{font-style:normal}
-.meta{color:var(--mut);font-size:.82rem}.empty{color:var(--mut);font-style:italic}
-.tags{color:var(--mut);font-size:.88rem;margin:2px 0 6px}.site{font-size:.88rem;color:var(--mut)}
+
 #lb{position:fixed;inset:0;background:#000e;display:none;align-items:center;justify-content:center;z-index:50}#lb.on{display:flex}#lb img{max-width:94vw;max-height:90vh}
+#toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--fg);color:var(--bg);padding:10px 18px;border-radius:99px;font-size:.9rem;display:none;z-index:60;max-width:90vw;text-align:center}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style></head>
 <body>
-<aside id="sb"><span class="logo">Prashanna Rijal</span><p class="meta" id="role" style="padding:0 12px">Reading</p><div id="nav"></div>
-<p style="padding:0 12px"><button class="s" id="th">◐ Light / Dark</button></p><p style="padding:0 12px"><button class="s" id="ow">Owner login</button></p></aside>
+<aside id="sb"><span class="logo">Prashanna Rijal</span><p class="meta" id="role">Projects, research and writing</p><div id="nav"></div>
+<div class="sbf"><button class="s" id="th">◐ Light / Dark</button><button class="s" id="ow">Owner login</button></div></aside>
 <div id="sc"></div>
-<main><div class="inner"><div class="top"><button class="s" id="bg">☰ Menu</button><button class="s" id="ow2">Owner login</button></div><div id="head"></div><div id="cmp"></div><div id="lst"></div></div></main>
-<div id="lb"></div>
+<main><div class="inner"><div class="top"><button class="s" id="bg">☰ Menu</button><button class="s" id="ow2">Owner login</button></div><div id="head"></div><div id="cmp"></div><div id="tools"></div><div id="lst"></div></div></main>
+<div id="lb"></div><div id="toast" role="status"></div>
 <script>
 /* ===== CONFIG: leave blank to auto-detect from your github.io URL ===== */
 const CFG={owner:'',repo:'',branch:'main'};
@@ -59,35 +120,84 @@ const q=s=>document.querySelector(s);
 const hdr=(extra)=>Object.assign({'Accept':'application/vnd.github+json'},TOKEN?{'Authorization':'Bearer '+TOKEN}:{},extra||{});
 function safeUrl(u){u=(u||'').trim();if(!u)return'';if(!/^https?:\/\//i.test(u))u='https://'+u;try{const x=new URL(u);return /^https?:$/.test(x.protocol)&&x.hostname.includes('.')?x.href:''}catch(e){return''}}
 const hostOf=u=>{try{return new URL(u).hostname.replace(/^www\./,'')}catch(e){return''}};
-function nav(){const a=(k,t)=>`<a class="${cur==k?'on':''}" onclick="go('${k}')">${t}</a>`;
-q('#nav').innerHTML=a('home',OWN?'✎ Read &amp; Write':'Home')+a('apps','Apps &amp; Websites')+'<div class="gl">Writing</div>'+a('stories','Stories')+a('poems','Poems')+'<div class="gl">ECA</div><div class="sub">'+['leo','drone','quiz','research'].map(k=>a(k,esc(SEC[k]))).join('')+'</div><div class="gl">Learning</div>'+a('academics','Academics')+a('training','Training')+'<div class="gl">Contact</div>'+a('chat','Chat with me')}
-function go(k){cur=k;editId=null;q('#sb').classList.remove('open');q('#sc').classList.remove('on');draw();q('main').scrollTop=0;scrollTo(0,0)}
+let curId=null,FROM='home',flt='all',qs='',LOADING=true,lastHash=location.hash;const SCR={};
+const GROUPS=[['all','All',null],['apps','Apps & websites',['apps']],['research','Research',['research']],['writing','Writing',['stories','poems']],['activities','Activities',['drone','leo','quiz']],['learning','Learning',['academics','training']]];
+const isPdf=m=>!!m&&((m.t||'')=='application/pdf'||/\.pdf$/i.test(m.p||''));
+function mlist(e){return e.media||[]}
+const vmedia=e=>mlist(e).filter(m=>!isPdf(m)),pdfs=e=>mlist(e).filter(isPdf);
+const pdfName=m=>m.n||'Document.pdf',pdfTitle=m=>pdfName(m).replace(/\.pdf$/i,'');
+function fsize(n){return n>=1048576?(n/1048576).toFixed(1)+' MB':Math.max(1,Math.round(n/1024))+' KB'}
+const plural=(n,w)=>n+' '+w+(n==1?'':'s');
+const mon=e=>e.ts?new Date(e.ts).toLocaleDateString('en-US',{month:'long',year:'numeric'}):(e.date||'Earlier');
+function exc(e){const t=(e.body||'').replace(/\r/g,'').trim();return t.length>260?t.slice(0,260).replace(/\s+\S*$/,'')+'…':t}
+let tt;function toast(m){const t=q('#toast');t.textContent=m;t.style.display='block';clearTimeout(tt);tt=setTimeout(()=>t.style.display='none',6000)}
+
+function nav(){const es=cur=='entry'?(E.find(x=>x.id==curId)||{}).sec:null;
+const a=(k,t)=>`<a href="#/${k=='home'?'':k}" class="${cur==k||es==k?'on':''}">${t}</a>`;
+q('#nav').innerHTML=a('home',OWN?'✎ Read &amp; Write':'Home')+a('apps','Apps &amp; Websites')+a('research','Research')+'<div class="gl">Writing</div>'+a('stories','Stories')+a('poems','Poems')+'<div class="gl">Activities</div><div class="sub">'+['leo','drone','quiz'].map(k=>a(k,esc(SEC[k]))).join('')+'</div><div class="gl">Learning</div>'+a('academics','Academics')+a('training','Training')+'<div class="gl">Contact</div>'+a('chat','Chat with me')}
+function go(k){const h='#/'+(k=='home'?'':k);if(location.hash==h)route();else location.hash=h}
+function route(){SCR[lastHash]=q('main').scrollTop||window.scrollY||0;
+ const h=location.hash.replace(/^#\/?/,''),prev=cur;editId=null;
+ if(h.startsWith('e/')){cur='entry';curId=h.slice(2);if(prev!='entry')FROM=prev=='chat'?'home':prev}
+ else if(h=='chat'||SEC[h])cur=h;else cur='home';
+ if(cur!='entry'&&prev!='entry')qs='';
+ q('#sb').classList.remove('open');q('#sc').classList.remove('on');
+ draw();const s=SCR[location.hash]||0;q('main').scrollTop=s;scrollTo(0,s);lastHash=location.hash}
 function xf(){const s=q('#sec'),x=q('#xf');if(x)x.style.display=((s?s.value:cur)=='apps')?'block':'none'}
-function composer(sec){if(!OWN)return'';const e=E.find(x=>x.id==editId)||{},isApp=(sec||e.sec)=='apps';
+function composer(sec){if(!OWN)return'';const e=E.find(x=>x.id==editId)||{},isApp=(sec||e.sec)=='apps',res=(sec||e.sec)=='research';
 return `<div class="box"><h3>${editId?'Edit entry':'Write something'}</h3>
 ${sec?'':`<select id="sec" aria-label="Section" onchange="xf()">${Object.entries(SEC).map(([k,v])=>`<option value="${k}" ${e.sec==k?'selected':''}>${esc(v)}</option>`).join('')}</select>`}
 <input id="ti" placeholder="Title" value="${esc(e.title)}">
 <div id="xf" style="display:${isApp?'block':'none'}"><input id="ur" placeholder="Link to the website or app (https://…)" value="${esc(e.url)}"><input id="tg" placeholder="Made with, separated by commas (e.g. PHP, PostgreSQL)" value="${esc((Array.isArray(e.tags)?e.tags:[]).join(', '))}"></div>
-<textarea id="bo" placeholder="Start writing here…">${esc(e.body)}</textarea>
-<p class="meta" style="margin:0 0 4px">Photos or videos — select several to make a swipeable set (photos are shrunk automatically; videos up to 25 MB)${editId&&mlist(e).length?' — new ones are added after the current ones':''}</p>
-<input type="file" id="fi" accept="image/*,video/*" multiple>${editId&&mlist(e).length?'<label class="meta"><input type="checkbox" id="rp" style="width:auto;margin-right:6px">Remove current photos/videos</label><br>':''}<button class="p" id="pb" onclick="pub('${sec||''}')">${editId?'Save changes':'Publish'}</button> ${editId?'<button onclick="go(cur)">Cancel</button>':''}<span class="meta" id="msg"></span></div>`}
-function mlist(e){return e.media||[]}
+<textarea id="bo" placeholder="${res&&!editId?'Abstract or a short summary of the paper…':'Start writing here…'}">${esc(e.body)}</textarea>
+<p class="meta" style="margin:0 0 4px">Photos, videos or PDFs — select several (photos are shrunk automatically; videos and PDFs up to 25 MB)${editId&&mlist(e).length?' — new ones are added after the current ones':''}</p>
+<input type="file" id="fi" accept="image/*,video/*,application/pdf,.pdf" multiple>${editId&&mlist(e).length?'<label class="meta"><input type="checkbox" id="rp" style="width:auto;margin-right:6px">Remove the current photos, videos and PDFs from this entry (the files stay in your repository)</label><br>':''}<button class="p" id="pb" onclick="pub('${sec||''}')">${editId?'Save changes':'Publish'}</button> ${editId?'<button onclick="editId=null;draw()">Cancel</button>':''}<span class="meta" id="msg"></span></div>`}
 function fb(el){if(el.dataset.f)return;el.dataset.f=1;el.src=RAW+el.getAttribute('src')}
-function media(e){const L=mlist(e);if(!L.length)return'';const one=m=>(m.t||'').startsWith('video')?`<video src="${esc(m.p)}" onerror="fb(this)" controls preload="metadata"></video>`:`<img src="${esc(m.p)}" onerror="fb(this)" alt="" loading="lazy" onclick="lb(this.src)">`;
+function media(e){const L=vmedia(e);if(!L.length)return'';const one=m=>(m.t||'').startsWith('video')?`<video src="${esc(m.p)}" onerror="fb(this)" controls preload="metadata"></video>`:`<img src="${esc(m.p)}" onerror="fb(this)" alt="" loading="lazy" onclick="lb(this.src)">`;
 if(L.length==1)return one(L[0]);
 return `<div class="car"><div class="trk" onscroll="dots(this)">${L.map(m=>`<div class="sl">${one(m)}</div>`).join('')}</div><span class="cn">1/${L.length}</span><button class="ar l" aria-label="Previous" onclick="nx(this,-1)">‹</button><button class="ar r" aria-label="Next" onclick="nx(this,1)">›</button><div class="dots">${L.map((m,i)=>`<i class="${i?'':'on'}"></i>`).join('')}</div></div>`}
 function dots(t){const i=Math.round(t.scrollLeft/t.clientWidth),c=t.parentNode;c.querySelector('.cn').textContent=(i+1)+'/'+t.children.length;c.querySelectorAll('.dots i').forEach((d,k)=>d.classList.toggle('on',k==i))}
 function nx(b,d){const t=b.parentNode.querySelector('.trk');t.scrollBy({left:d*t.clientWidth,behavior:'smooth'})}
-function listE(items,showSec){if(LOADERR&&!E.length)return '<p class="empty">Could not load entries. Check your connection and refresh the page.</p>';
-if(!items.length)return `<p class="empty">${cur=='apps'&&OWN?'No apps or websites yet. Use the form above to add one.':'Nothing here yet.'}</p>`;
-return items.map(e=>{const dev=/[\u0900-\u097F]/.test(e.body||''),u=e.sec=='apps'?safeUrl(e.url):'',tags=Array.isArray(e.tags)?e.tags.filter(Boolean):[];
-return `<article class="box ent ${e.sec=='poems'?'poem':''} ${dev?'dev':''}"><h3>${esc(e.title||'Untitled')}</h3><div class="meta">${showSec?esc(SEC[e.sec]||'')+' · ':''}${esc(e.date)}</div>${media(e)}${tags.length?`<p class="tags">Made with: ${esc(tags.join(', '))}</p>`:''}<div class="body">${esc(e.body)}</div>${u?`<p style="margin-top:14px"><a class="btn" href="${esc(u)}" target="_blank" rel="noopener noreferrer">Visit ${esc(hostOf(u))}</a></p>`:''}${OWN?`<p style="margin-top:12px"><button class="s" onclick="ed('${e.id}')">Edit</button> <button class="s" onclick="del('${e.id}')">Delete</button></p>`:''}</article>`}).join('')}
-function drawList(){if(cur=='chat'){q('#lst').innerHTML='';return}
-q('#lst').innerHTML=(cur=='home'?'<h2>Everything I\'ve written and made</h2>':'')+listE(cur=='home'?E:E.filter(e=>e.sec==cur),cur=='home')}
-function draw(){nav();q('#role').textContent=OWN?'Owner mode — you can write & upload':'Read-only';q('#ow').textContent=OWN?'Log out of owner mode':'Owner login';q('#ow2').textContent=OWN?'Log out':'Owner login';
-const dark=document.documentElement.dataset.theme?document.documentElement.dataset.theme=='dark':matchMedia('(prefers-color-scheme:dark)').matches;
-if(cur=='chat'){q('#head').innerHTML='<h1>Chat with me</h1><p>Say hello — your message opens in your email app, addressed to me.</p>';q('#cmp').innerHTML=`<div class="box"><input id="cn" placeholder="Your name"><textarea id="cm" placeholder="Your message"></textarea><button class="p" onclick="mail()">Send email</button><p class="meta" style="margin-top:12px">Or write to <a href="mailto:rijalprashhana@gmail.com">rijalprashhana@gmail.com</a></p></div>`}
-else{q('#head').innerHTML=cur=='home'?`<h1>${OWN?'Read & write':'Prashanna Rijal'}</h1><p class="meta" style="font-size:1rem">A place to document what I build, what I learn, what I write, and what I wonder about.</p>`:`<h1>${esc(SEC[cur])}</h1><p class="meta" style="font-size:1rem">${esc(BLURB[cur])}</p>`;q('#cmp').innerHTML=composer(cur=='home'?'':cur)}
+function pdfCard(m){const p=esc(m.p);
+return `<div class="pdf"><span class="ic">PDF</span><div class="tx"><b>${esc(pdfTitle(m))}</b><span class="meta">${m.s?fsize(m.s):'PDF document'}</span></div><div class="pa"><a class="btn" href="${p}" target="_blank" rel="noopener">Open</a><a class="btn o" href="${p}" download="${esc(pdfName(m))}">Download</a><button class="s" data-src="${p}" onclick="pv(this)">Show preview</button></div></div><div class="pvb"></div>`}
+function pv(b){const box=b.closest('.pdf').nextElementSibling;if(box.firstChild){box.innerHTML='';b.textContent='Show preview';return}box.innerHTML=`<iframe src="${esc(b.dataset.src)}#view=FitH" title="PDF preview"></iframe>`;b.textContent='Hide preview'}
+function ownerBtns(e){return OWN?`<button class="s" onclick="ed('${e.id}')">Edit</button><button class="s" onclick="del('${e.id}')">Delete</button>`:''}
+function row(e,showSec){const dev=/[\u0900-\u097F]/.test(e.body||''),u=e.sec=='apps'?safeUrl(e.url):'',tags=Array.isArray(e.tags)?e.tags.filter(Boolean):[],v=vmedia(e),pf=pdfs(e),th=v.find(m=>!(m.t||'').startsWith('video')),
+ ni=v.filter(m=>!(m.t||'').startsWith('video')).length,nv=v.length-ni;
+return `<article class="row ${th?'':'nt'} ${e.sec=='poems'?'poem':''} ${dev?'dev':''}" onclick="rowGo(event,'${e.id}')"><div>
+<div class="mrow">${showSec?`<span class="sec">${esc(SEC[e.sec]||'')}</span>`:''}<span class="meta">${esc(e.date)}</span></div>
+<h3 class="rtitle"><a href="#/e/${e.id}">${esc(e.title||'Untitled')}</a></h3>
+${e.body?`<p class="ex">${esc(exc(e))}</p>`:''}
+<div class="badges">${pf.length?`<span class="pill hi">${pf.length>1?plural(pf.length,'PDF'):'PDF'}</span>`:''}${ni?`<span class="pill">${plural(ni,'photo')}</span>`:''}${nv?`<span class="pill">${plural(nv,'video')}</span>`:''}${tags.map(t=>`<span class="pill">${esc(t)}</span>`).join('')}</div>
+${pf.length||u||OWN?`<div class="racts">${pf.length?`<a class="btn sm" href="${esc(pf[0].p)}" target="_blank" rel="noopener">Read PDF</a>`:''}${u?`<a class="btn sm o" href="${esc(u)}" target="_blank" rel="noopener noreferrer">Visit ${esc(hostOf(u))}</a>`:''}${ownerBtns(e)}</div>`:''}
+</div>${th?`<img class="th" src="${esc(th.p)}" onerror="fb(this)" alt="" loading="lazy">`:''}</article>`}
+function rowGo(ev,id){if(ev.target.closest('a,button'))return;location.hash='#/e/'+id}
+function listE(items,showSec){if(LOADING&&!E.length)return'<p class="empty">Loading entries…</p>';
+if(LOADERR&&!E.length)return'<p class="empty">Could not load entries. Check your connection and refresh the page.</p>';
+if(!items.length){const filtered=qs.trim()||(cur=='home'&&flt!='all');
+ return `<p class="empty">${filtered?'No entries match. Try another word or filter.':OWN?(cur=='research'?'No research yet. Use the form above and attach your PDF.':'Nothing here yet. Use the form above to add one.'):'Nothing here yet.'}</p>`}
+let out='',last='';for(const e of items){const m=mon(e);if(m!==last){out+=`<h2 class="mo">${esc(m)}</h2>`;last=m}out+=row(e,showSec)}return out}
+function drawChips(){const c=q('#chips');if(!c)return;if(cur!='home'){c.innerHTML='';return}
+c.innerHTML=GROUPS.map(g=>{const n=g[2]?E.filter(e=>g[2].includes(e.sec)).length:E.length;return `<button class="chip ${flt==g[0]?'on':''}" onclick="setF('${g[0]}')">${esc(g[1])} <small>${n}</small></button>`}).join('')}
+function setF(k){flt=k;drawChips();drawList()}
+function drawList(){if(cur=='chat'||cur=='entry'){q('#lst').innerHTML='';return}
+let items=cur=='home'?E:E.filter(e=>e.sec==cur);
+if(cur=='home'&&flt!='all'){const g=GROUPS.find(x=>x[0]==flt);items=items.filter(e=>g[2].includes(e.sec))}
+const s=qs.trim().toLowerCase();if(s)items=items.filter(e=>((e.title||'')+' '+(e.body||'')+' '+(Array.isArray(e.tags)?e.tags.join(' '):'')).toLowerCase().includes(s));
+q('#lst').innerHTML=listE(items,cur=='home')}
+function featured(){const e=E.find(x=>x.sec=='research'&&pdfs(x).length);if(!e)return'';const m=pdfs(e)[0];
+return `<div class="feat"><div><span class="sec">Research paper</span><h3><a href="#/e/${e.id}">${esc(e.title||'Untitled')}</a></h3>${e.body?`<p class="ex">${esc(exc(e))}</p>`:''}</div><div class="pa"><a class="btn" href="${esc(m.p)}" target="_blank" rel="noopener">Read the paper</a><a class="btn o" href="#/e/${e.id}">Details</a></div></div>`}
+function entryView(e){if(!e)return LOADING&&!E.length?'<p class="empty">Loading…</p>':'<p class="empty">This entry could not be found. <a href="#/">Go to the home page</a>.</p>';
+const dev=/[\u0900-\u097F]/.test(e.body||''),u=e.sec=='apps'?safeUrl(e.url):'',tags=Array.isArray(e.tags)?e.tags.filter(Boolean):[],back=FROM&&FROM!='home'&&SEC[FROM]?FROM:'';
+return `<a class="back" href="#/${back}">← ${back?esc(SEC[back]):'All entries'}</a><article class="ent ${e.sec=='poems'?'poem':''} ${dev?'dev':''}"><div class="mrow"><a class="sec" href="#/${e.sec}">${esc(SEC[e.sec]||'')}</a><span class="meta">${esc(e.date)}</span></div><h1>${esc(e.title||'Untitled')}</h1>${tags.length?`<p class="tags">Made with: ${esc(tags.join(', '))}</p>`:''}${pdfs(e).map(pdfCard).join('')}${media(e)}${e.body?`<div class="body">${esc(e.body)}</div>`:''}${u?`<p style="margin-top:16px"><a class="btn" href="${esc(u)}" target="_blank" rel="noopener noreferrer">Visit ${esc(hostOf(u))}</a></p>`:''}<div class="acts"><button class="s" onclick="cp()">Copy link</button>${ownerBtns(e)}</div></article>`}
+function cp(){const u=location.href;(navigator.clipboard?navigator.clipboard.writeText(u):Promise.reject()).then(()=>toast('Link copied'),()=>prompt('Copy this link',u))}
+function draw(){nav();q('#role').textContent=OWN?'Owner mode — you can write & upload':'Projects, research and writing';q('#ow').textContent=OWN?'Log out of owner mode':'Owner login';q('#ow2').textContent=OWN?'Log out':'Owner login';
+const HD=q('#head'),C=q('#cmp'),T=q('#tools');T.innerHTML='';C.innerHTML='';
+if(cur=='chat'){HD.innerHTML='<h1>Chat with me</h1><p class="lede">Say hello — your message opens in your email app, addressed to me.</p>';C.innerHTML=`<div class="box"><input id="cn" placeholder="Your name"><textarea id="cm" placeholder="Your message"></textarea><button class="p" onclick="mail()">Send email</button><p class="meta" style="margin-top:12px">Or write to <a href="mailto:rijalprashhana@gmail.com">rijalprashhana@gmail.com</a></p></div>`}
+else if(cur=='entry'){const e=E.find(x=>x.id==curId);HD.innerHTML=(OWN&&editId&&e?composer(''):'')+entryView(e)}
+else{HD.innerHTML=cur=='home'?`<h1>${OWN?'Read & write':'Prashanna Rijal'}</h1><p class="lede">A place to document what I build, what I learn, what I write, and what I wonder about.</p>${featured()}`:`<h1>${esc(SEC[cur])}</h1><p class="lede">${esc(BLURB[cur])}</p>`;
+ C.innerHTML=composer(cur=='home'?'':cur);
+ T.innerHTML=`<input id="sr" type="search" aria-label="Search" placeholder="${cur=='home'?'Search everything':'Search '+esc(SEC[cur]).toLowerCase()}" value="${esc(qs)}" oninput="qs=this.value;drawList()"><div id="chips"></div>`;drawChips()}
 drawList()}
 
 /* ===== GitHub storage (unchanged) ===== */
@@ -110,13 +220,16 @@ async function loadPublic(){ // tries GitHub API, then this site's own file, the
  return null}
 function fileB64(f){return new Promise((ok,no)=>{const r=new FileReader();r.onload=()=>ok(r.result.split(',')[1]);r.onerror=no;r.readAsDataURL(f)})}
 function shrink(f){return new Promise((ok)=>{if(!f.type.startsWith('image/')||/gif|svg/.test(f.type))return ok(f);const i=new Image(),u=URL.createObjectURL(f);i.onload=()=>{const s=Math.min(1,1800/Math.max(i.width,i.height)),c=document.createElement('canvas');c.width=i.width*s;c.height=i.height*s;c.getContext('2d').drawImage(i,0,0,c.width,c.height);c.toBlob(b=>ok(b||f),'image/jpeg',.85);URL.revokeObjectURL(u)};i.onerror=()=>ok(f);i.src=u})}
-async function upload(f){const isV=f.type.startsWith('video');if(isV&&f.size>25e6)throw new Error(f.name+' is over 25 MB');
+async function upload(f){const isP=f.type=='application/pdf'||/\.pdf$/i.test(f.name),isV=f.type.startsWith('video');
+ if((isV||isP)&&f.size>25e6)throw new Error(f.name+' is over 25 MB');
+ if(isP){const path='media/'+Date.now()+'-'+Math.random().toString(36).slice(2,7)+'.pdf';
+  await putFile(path,await fileB64(f),undefined,'Add media');return{p:path,t:'application/pdf',n:f.name,s:f.size}}
  const blob=isV?f:await shrink(f),ext=isV?(f.name.split('.').pop()||'mp4').toLowerCase():(blob.type=='image/jpeg'?'jpg':(f.name.split('.').pop()||'png').toLowerCase());
  const path='media/'+Date.now()+'-'+Math.random().toString(36).slice(2,7)+'.'+ext;
  await putFile(path,await fileB64(blob),undefined,'Add media');return{p:path,t:isV?(f.type||'video/mp4'):(blob.type||f.type)}}
 
 async function pub(sec){if(!OWN||busy)return;const t=q('#ti').value.trim(),b=q('#bo').value.trim(),fs=[...q('#fi').files],m=q('#msg');
-if(!t&&!b&&!fs.length){alert('Write something or add a photo/video first.');return}
+if(!t&&!b&&!fs.length){alert('Write something or add a photo, video or PDF first.');return}
 const s=sec||q('#sec').value;let url='',tags=[];
 if(s=='apps'){const raw=q('#ur').value.trim();url=safeUrl(raw);if(raw&&!url){m.textContent=' That link does not look right. Use a full address like https://example.com';return}
  tags=q('#tg').value.split(',').map(x=>x.trim()).filter(Boolean)}
@@ -127,10 +240,10 @@ try{const old=E.find(x=>x.id==editId)||{},rm=q('#rp')&&q('#rp').checked;let med=
  const ts=old.ts||Date.now(),id=editId||String(ts),d={...old,id,sec:s,title:t,body:b,media:med,date:old.date||new Date().toLocaleDateString(undefined,{year:'numeric',month:'short',day:'numeric'}),ts};
  if(s=='apps'){d.url=url;d.tags=tags}else{delete d.url;delete d.tags}
  await commitList(l=>[d,...l.filter(x=>x.id!=id)],(editId?'Edit':'Add')+' entry');
- editId=null;draw()}
+ editId=null;draw();if(fs.length)toast('Published. New files can take a minute or two to appear on the live site.')}
 catch(e){m.textContent=' Could not save: '+(e.message||'error');q('#pb').disabled=false}busy=false}
 function ed(id){editId=id;draw();q('main').scrollTop=0;scrollTo(0,0)}
-async function del(id){if(OWN&&confirm('Delete this entry?'))try{await commitList(l=>l.filter(x=>x.id!=id),'Delete entry');drawList()}catch(e){alert('Could not delete: '+e.message)}}
+async function del(id){if(OWN&&confirm('Delete this entry?'))try{await commitList(l=>l.filter(x=>x.id!=id),'Delete entry');if(cur=='entry')go(FROM&&SEC[FROM]?FROM:'home');else draw()}catch(e){alert('Could not delete: '+e.message)}}
 function lb(s){const l=q('#lb');l.innerHTML=`<img src="${s}" alt="">`;l.classList.add('on');l.onclick=()=>l.classList.remove('on')}
 function mail(){location.href='mailto:rijalprashhana@gmail.com?subject='+encodeURIComponent('Hello from '+q('#cn').value)+'&body='+encodeURIComponent(q('#cm').value)}
 /* ===== Owner login (same flow as before) ===== */
@@ -138,13 +251,14 @@ async function verify(){if(!TOKEN)return false;try{const r=await fetch(`https://
 async function ownerBtn(){if(OWN){TOKEN=null;OWN=false;try{localStorage.removeItem('gh_token')}catch(e){}draw();return}
  const t=prompt('Paste your GitHub token (fine-grained, Contents: Read and write, for this repo only).\nIt is stored only in this browser.');if(!t)return;TOKEN=t.trim();
  if(await verify()){OWN=true;try{localStorage.setItem('gh_token',TOKEN)}catch(e){}draw()}else{TOKEN=null;alert('That token does not have write access to '+OWNER+'/'+REPO+'.')}}
-
 function menu(){q('#sb').classList.toggle('open');q('#sc').classList.toggle('on')}
 q('#bg').onclick=menu;q('#sc').onclick=menu;
 q('#ow').onclick=ownerBtn;q('#ow2').onclick=ownerBtn;
+q('#nav').onclick=ev=>{const a=ev.target.closest('a');if(!a)return;q('#sb').classList.remove('open');q('#sc').classList.remove('on');if(location.hash==a.getAttribute('href'))route()};
 q('#th').onclick=()=>{const r=document.documentElement,d=r.dataset.theme?r.dataset.theme=='dark':matchMedia('(prefers-color-scheme:dark)').matches;r.dataset.theme=d?'light':'dark';try{localStorage.setItem('theme',r.dataset.theme)}catch(e){}};
 addEventListener('keydown',e=>{if(e.key=='Escape'){q('#lb').classList.remove('on');q('#sb').classList.remove('open');q('#sc').classList.remove('on')}});
-draw();
-(async()=>{const L=await loadPublic();if(L)E=L.sort((a,b)=>(b.ts||0)-(a.ts||0));else LOADERR=true;drawList();
+addEventListener('hashchange',route);
+route();
+(async()=>{const L=await loadPublic();if(L)E=L.sort((a,b)=>(b.ts||0)-(a.ts||0));else LOADERR=true;LOADING=false;draw();
  if(TOKEN){OWN=await verify();if(OWN){try{E=(await readList()).list.sort((a,b)=>(b.ts||0)-(a.ts||0));LOADERR=false}catch(e){}draw()}}})();
 </script></body></html>
