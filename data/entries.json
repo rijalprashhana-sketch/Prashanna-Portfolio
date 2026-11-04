@@ -1,5 +1,21 @@
 [
  {
+  "id": "1793754080053",
+  "sec": "research",
+  "title": "Measuring Wi-Fi Signal Attenuation Through Common Wall Materials with ESP32",
+  "body": "This project started with a problem at home: gaming ping of 150-300 ms in the farthest room of the house, but noticeably lower in a glass-walled room at a similar distance from the router. I wanted to know how much of that comes from the walls themselves.\n\nI built a controlled test bench with two ESP32 DevKit V1 boards, one as an access point and one as a station, placed 6 ft apart at a height of 3 ft. Specimens of glass, gypsum board, plywood, wood, brick, concrete and a 10-inch wall were placed between them, and I logged 30 RSSI readings per condition, plus a no-obstruction baseline. I wrote the transmitter and receiver firmware in Arduino C++. I analysed the data in Python (NumPy and SciPy), computing attenuation relative to the baseline with Welch confidence intervals, Mann-Whitney checks, and ANOVA and Kruskal-Wallis tests across materials. The analysis also accounts for autocorrelation between consecutive readings.",
+  "media": [
+   {
+    "p": "media/1793754076084-x0965.pdf",
+    "t": "application/pdf",
+    "n": "wifi_attenuation_research_paper (1).pdf",
+    "s": 851375
+   }
+  ],
+  "date": "Nov 4, 2026",
+  "ts": 1793754080053
+ },
+ {
   "id": "1791684522354",
   "sec": "apps",
   "title": "Arniko-notes",
