@@ -1,5 +1,21 @@
 [
  {
+  "id": "1791684522354",
+  "sec": "apps",
+  "title": "Arniko-notes",
+  "body": "This website was built to assist students with exam study materials such as past year question paper, real VIVA questions, subject-wise projects and practical works.\nIt was built by me- Prashanna Rijal- when I was in class pursuing my +2 studies.  \nI personally assure that it is reliable site for learning as all the materials as obtained from surveying students, and notes are collected from toppers.",
+  "media": [
+   {
+    "p": "media/1791684520192-w3ke9.jpg",
+    "t": "image/jpeg"
+   }
+  ],
+  "date": "Oct 11, 2026",
+  "ts": 1791684522354,
+  "url": "https://arniko-notes.netlify.app/",
+  "tags": []
+ },
+ {
   "id": "1791649464233",
   "sec": "drone",
   "title": "MiniQuad flight controller",
