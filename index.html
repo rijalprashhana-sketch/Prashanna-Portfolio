@@ -112,7 +112,7 @@ const H=location.hostname,P=location.pathname.split('/').filter(Boolean);
 const OWNER=CFG.owner||H.split('.')[0],REPO=CFG.repo||(H.endsWith('github.io')?(P[0]&&!P[0].endsWith('.html')?P[0]:OWNER+'.github.io'):''),BR=CFG.branch;
 const API=`https://api.github.com/repos/${OWNER}/${REPO}/contents/`,RAW=`https://raw.githubusercontent.com/${OWNER}/${REPO}/${BR}/`,DATA='data/entries.json';
 let TOKEN=null;try{TOKEN=localStorage.getItem('gh_token')}catch(e){}
-const SEC={stories:'Stories',poems:'Poems',apps:'Apps & Websites',leo:'Leo Club of Ambassador',drone:'Mini Drone',quiz:'Quiz',research:'Research',academics:'Academics',training:'Training'};
+const SEC={stories:'Stories',poems:'Poems',apps:'Apps & Websites',leo:'Leo Club of Ambassador',drone:'Electronics',quiz:'Quiz',research:'Research',academics:'Academics',training:'Training'};
 const BLURB={apps:'Apps and websites I have made.',stories:'Stories I have written.',poems:'Poems I have written.',leo:'Service, events and memories with the Leo Club of Ambassador.',drone:'Notes, photos and lessons from building the mini drone.',quiz:'Quiz competitions and what I learned from them.',research:'Research notes, questions and experiments.',academics:'Schools, subjects, results and study notes.',training:'Training, courses and certificates.'};
 let E=[],OWN=false,cur='home',editId=null,busy=false,LOADERR=false;
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
